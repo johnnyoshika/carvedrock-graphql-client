@@ -32,6 +32,10 @@ const updateReviews = (
     }
   });
 
+  // Prevent double insertion if a subscription event already added this review
+  if (data.product.reviews.some(r => r.id === review.id))
+    return;
+
   client.writeQuery({
     query: GET_PRODUCT,
     variables: {

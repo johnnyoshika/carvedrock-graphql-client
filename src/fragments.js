@@ -7,3 +7,12 @@ export const PRODUCT_REVIEW_TYPE_FRAGMENT = gql`
     review
   }
 `;
+
+export const PRODUCT_REVIEW_ADDED_TYPE_FRAGMENT = gql`
+  fragment reviewAddedMessage on ReviewAddedMessageType {
+    id
+    productId
+    title
+    review
+  }
+`;

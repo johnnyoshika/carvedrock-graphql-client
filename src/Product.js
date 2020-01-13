@@ -6,11 +6,39 @@ import Spinner from './Spinner';
 import Error from './Error';
 
 import { GET_PRODUCT } from './queries';
+import { REVIEWS_SUBSCRIPTION } from './subscriptions';
 
 const Product = ({ match: { params: { id } } }) => {
-  const { data, loading, error } = useQuery(GET_PRODUCT, {
+  const { data, loading, error, subscribeToMore } = useQuery(GET_PRODUCT, {
     variables: {
       id
+    }
+  });
+
+  subscribeToMore({
+    document: REVIEWS_SUBSCRIPTION,
+    variables: {
+      id
+    },
+    updateQuery: (prev, { subscriptionData }) => {
+      if (!prev || !subscriptionData.data) return prev;
+      const reviewAddedMessage = subscriptionData.data.reviewAdded;
+      if (reviewAddedMessage.productId !== prev.product.id) return prev;
+      if (prev.product.reviews.some(r => r.id === reviewAddedMessage.id)) return prev;
+
+      return {
+        ...prev,
+        product: {
+          ...prev.product,
+          reviews: [
+            ...prev.product.reviews,
+            {
+              ...(({ id, title, review }) => ({ id, title, review }))(reviewAddedMessage), // neat trick to pick just the properties we want: https://stackoverflow.com/a/39333479/188740
+              __typename: 'ProductReviewType'
+            }
+          ]
+        }
+      };
     }
   });
 
