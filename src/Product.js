@@ -1,29 +1,10 @@
 import React from 'react';
-import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 
 import Spinner from './Spinner';
 import Error from './Error';
 
-const GET_PRODUCT = gql`
-  query ($id: ID!) {
-    product(id: $id) {
-      id
-      name
-      price
-      rating
-      photoFileName
-      description
-      stock
-      introducedAt
-      reviews {
-        id
-        title
-        review
-      }
-    }
-  }
-`;
+import { GET_PRODUCT } from './queries';
 
 const Product = ({ match: { params: { id } } }) => {
   const { data, loading, error } = useQuery(GET_PRODUCT, {
