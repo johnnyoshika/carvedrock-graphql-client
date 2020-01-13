@@ -32,6 +32,8 @@ const updateReviews = (
     }
   });
 
+  console.log('update after mutation', 'some', data.product.reviews.some(r => r.id === review.id), data.product, review);
+  
   // Prevent double insertion if a subscription event already added this review
   if (data.product.reviews.some(r => r.id === review.id))
     return;

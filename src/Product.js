@@ -23,9 +23,18 @@ const Product = ({ match: { params: { id } } }) => {
       id
     },
     updateQuery: (prev, { subscriptionData }) => {
+      
+      console.log('updateQuery', prev, subscriptionData);
+
       if (!prev || !subscriptionData.data) return prev;
       const reviewAddedMessage = subscriptionData.data.reviewAdded;
+
+      console.log('productId matches', !(reviewAddedMessage.productId !== prev.product.id));
+
       if (reviewAddedMessage.productId !== prev.product.id) return prev;
+
+      console.log('already exists', prev.product.reviews.some(r => r.id === reviewAddedMessage.id));
+
       if (prev.product.reviews.some(r => r.id === reviewAddedMessage.id)) return prev;
 
       return {
