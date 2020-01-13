@@ -1,4 +1,9 @@
 import React from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+
+import Products from './Products';
+import Product from './Product';
+import ReviewAdd from './ReviewAdd';
 
 const App = () => (
   <div className="container">
@@ -10,7 +15,11 @@ const App = () => (
               For outdoorsy types
           </div>
       </header>
-      <div>Outlet...</div>
+      <Router>
+        <Route exact path="/" component={Products} />
+        <Route path="/products/:id" component={Product} />
+        <Route path="/products/:id/review" component={ReviewAdd} />
+      </Router>
   </div>
 );
 
