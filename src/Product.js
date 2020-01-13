@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useQuery } from '@apollo/react-hooks';
 
 import Spinner from './Spinner';
@@ -61,6 +62,9 @@ const Product = ({ match: { params: { id } } }) => {
             </div>
           </div>
         ))}
+        <div>
+          <Link to={`/products/${id}/review`}>Add a Review</Link>
+        </div>
       </div>
     </div>
   );
