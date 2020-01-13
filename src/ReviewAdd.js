@@ -97,7 +97,7 @@ const ReviewAdd = ({ match: { params: { id: productId } } }) => {
             <label htmlFor="title"></label>
           </div>
           <div className="col-9">
-            <input id="title" className="form-control" type="text" value={title} onChange={onTitleChange} />
+            <input id="title" className="form-control" type="text" value={title} onChange={onTitleChange} required />
           </div>
         </div>
         <div className="row">
@@ -105,7 +105,7 @@ const ReviewAdd = ({ match: { params: { id: productId } } }) => {
             <label htmlFor="review"></label>
           </div>
           <div className="col-9">
-            <textarea id="review" className="form-control" type="text" value={review} onChange={onReviewChange} rows="5"></textarea>
+            <textarea id="review" className="form-control" type="text" value={review} onChange={onReviewChange} rows="5" required></textarea>
           </div>
         </div>
         <div className="row mt-2">
