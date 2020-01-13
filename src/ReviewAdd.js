@@ -62,6 +62,14 @@ const ReviewAdd = ({ match: { params: { id: productId } } }) => {
         productId
       }
     },
+    optimisticResponse: {
+      createReview: {
+        __typename: "ProductReviewType",
+        id: new Date().getTime() + '',
+        title,
+        review
+      }
+    },
     update: (client, data) => updateReviews(client, data, productId)
   });
 
@@ -70,10 +78,9 @@ const ReviewAdd = ({ match: { params: { id: productId } } }) => {
 
   const onSubmit = e => {
     e.preventDefault();
-    addReview().then(() => {
-      setTitle('');
-      setReview('');
-    });
+    setTitle('');
+    setReview('');
+    addReview();
   };
 
   return (
