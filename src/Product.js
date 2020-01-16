@@ -15,6 +15,8 @@ const Product = ({ match: { params: { id } } }) => {
     }
   });
 
+  // variables don't do anything here, because our subscription GraphQL request doesn't expect any.
+  // A future enhancement would be for the server to expect an id an only push changes to this client if the product id matches.
   subscribeToMore({
     document: REVIEWS_SUBSCRIPTION,
     variables: {
